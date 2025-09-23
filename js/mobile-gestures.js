@@ -17,8 +17,32 @@ function setupMobileGestures() {
     const diffX = startX - endX;
     const diffY = startY - endY;
 
-    // Handle swipe gestures if needed in the future
-    // Currently no specific swipe actions needed since image gallery was removed
+    // Handle horizontal swipes for tab navigation in detail view
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const activeTab = document.querySelector('.tab-button[style*="var(--primary)"]');
+      
+      if (tabButtons.length > 1 && activeTab) {
+        const currentIndex = Array.from(tabButtons).indexOf(activeTab);
+        let nextIndex;
+        
+        if (diffX > 0 && currentIndex < tabButtons.length - 1) {
+          // Swipe left - next tab
+          nextIndex = currentIndex + 1;
+        } else if (diffX < 0 && currentIndex > 0) {
+          // Swipe right - previous tab
+          nextIndex = currentIndex - 1;
+        }
+        
+        if (nextIndex !== undefined) {
+          const nextTab = tabButtons[nextIndex];
+          const tabName = nextTab.getAttribute('data-tab');
+          if (tabName && window.switchTab) {
+            window.switchTab(tabName);
+          }
+        }
+      }
+    }
   });
 
   // Pull to refresh (simple version)
@@ -79,6 +103,28 @@ function setupMobileGestures() {
       .tab-button {
         min-height: 44px;
         padding: 12px 16px;
+      }
+      
+      .subbreed-item {
+        min-height: 44px;
+      }
+      
+      .back-button {
+        min-height: 44px;
+      }
+      
+      /* Improve scrolling for tab navigation */
+      .tab-navigation {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+      }
+      
+      /* Better touch feedback */
+      .tab-button:active,
+      .back-button:active,
+      .subbreed-item:active {
+        transform: scale(0.98);
+        opacity: 0.8;
       }
     }
   `;

@@ -24,12 +24,12 @@ async function showDetails(breedId) {
 
   // Show enhanced details with tabs
   document.getElementById('results').innerHTML = `
-    <div style="grid-column: 1/-1; background: var(--card-dark); border-radius: 12px; border: 1px solid var(--border-dark); color: var(--text-dark); overflow: hidden;">
+    <div class="breed-detail-container" style="grid-column: 1/-1; background: var(--card-dark); border-radius: 12px; border: 1px solid var(--border-dark); color: var(--text-dark); overflow: hidden;">
       <!-- Header Section -->
-      <div style="padding: 20px; border-bottom: 1px solid var(--border-dark);">
+      <div class="breed-detail-header" style="padding: 20px; border-bottom: 1px solid var(--border-dark);">
         <!-- Back Button -->
         <div style="margin-bottom: 16px;">
-          <button onclick="renderBreeds(window.AppConfig.filteredBreeds)" 
+          <button class="back-button" onclick="renderBreeds(window.AppConfig.filteredBreeds)" 
             style="display: flex; align-items: center; gap: 8px; background: var(--border-dark); hover:background: var(--subtext-dark); color: var(--text-dark); border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: background-color 0.2s ease; font-size: 14px;"
             onmouseover="this.style.backgroundColor='var(--subtext-dark)'" 
             onmouseout="this.style.backgroundColor='var(--border-dark)'">
@@ -39,18 +39,18 @@ async function showDetails(breedId) {
         </div>
         
         <!-- Breadcrumb -->
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--subtext-dark); font-size: 14px;">
+        <div class="breadcrumb" style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--subtext-dark); font-size: 14px;">
           <span>Breeds</span>
           <span>/</span>
           <span>${breed.name}</span>
         </div>
         
         <div style="display: flex; gap: 24px; align-items: flex-start;">
-          <div id="detail-img" style="width: 120px; height: 120px; background: var(--border-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">🐕</div>
-          <div style="flex: 1;">
-            <h1 style="color: var(--text-dark); margin: 0 0 8px 0; font-size: 2rem; font-weight: 700;">${breed.name}</h1>
+          <div id="detail-img" class="breed-detail-image" style="width: 120px; height: 120px; background: var(--border-dark); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0;">🐕</div>
+          <div class="breed-detail-info" style="flex: 1;">
+            <h1 class="breed-detail-title" style="color: var(--text-dark); margin: 0 0 8px 0; font-size: 2rem; font-weight: 700;">${breed.name}</h1>
             <p style="color: var(--subtext-dark); margin: 0 0 12px 0; font-size: 16px; line-height: 1.5;">${breedInfo.description}</p>
-            <div style="color: var(--subtext-dark); font-size: 14px;">
+            <div class="breed-detail-meta" style="color: var(--subtext-dark); font-size: 14px;">
               <span><strong>Origin:</strong> ${breedInfo.origin}</span> | 
               <span><strong>Size:</strong> ${formatBreedSizeWithConfidence(breed)}</span> | 
               <span><strong>Lifespan:</strong> ${breedInfo.lifespan}</span>
@@ -60,7 +60,7 @@ async function showDetails(breedId) {
       </div>
 
       <!-- Tab Navigation -->
-      <div style="display: flex; border-bottom: 1px solid var(--border-dark);">
+      <div class="tab-navigation" style="display: flex; border-bottom: 1px solid var(--border-dark);">
         <button class="tab-button active" onclick="switchTab('about')" data-tab="about" style="padding: 16px 24px; background: none; border: none; color: var(--text-dark); cursor: pointer; border-bottom: 2px solid var(--primary); font-weight: 600;">About</button>
         <button class="tab-button" onclick="switchTab('care')" data-tab="care" style="padding: 16px 24px; background: none; border: none; color: var(--subtext-dark); cursor: pointer; border-bottom: 2px solid transparent; font-weight: 600;">Care</button>
         ${subBreeds.length > 0 ? `<button class="tab-button" onclick="switchTab('variants')" data-tab="variants" style="padding: 16px 24px; background: none; border: none; color: var(--subtext-dark); cursor: pointer; border-bottom: 2px solid transparent; font-weight: 600;">Variants</button>` : ''}
@@ -68,7 +68,7 @@ async function showDetails(breedId) {
       </div>
 
       <!-- Tab Content -->
-      <div style="padding: 24px;">
+      <div class="tab-content-container" style="padding: 24px;">
         <!-- About Tab -->
         <div id="about-tab" class="tab-content" style="display: block;">
           <div style="margin-bottom: 32px;">
@@ -79,9 +79,9 @@ async function showDetails(breedId) {
           <div style="margin-bottom: 32px;">
             <h3 style="color: var(--text-dark); margin: 0 0 16px 0; font-size: 1.25rem; font-weight: 600;">Temperament</h3>
             <p style="color: var(--subtext-dark); line-height: 1.6; margin-bottom: 16px;">${breedInfo.temperament}</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <div class="trait-tags" style="display: flex; flex-wrap: wrap; gap: 8px;">
               ${breedInfo.traits.map(trait => `
-                <span style="background: var(--border-dark); color: var(--text-dark); padding: 4px 12px; border-radius: 16px; font-size: 14px;">${trait}</span>
+                <span class="trait-tag" style="background: var(--border-dark); color: var(--text-dark); padding: 4px 12px; border-radius: 16px; font-size: 14px;">${trait}</span>
               `).join('')}
             </div>
           </div>
@@ -99,23 +99,23 @@ async function showDetails(breedId) {
             <p style="color: var(--subtext-dark); line-height: 1.6; margin-bottom: 24px;">${breedInfo.careIntro}</p>
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-            <div style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
+          <div class="care-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+            <div class="care-card" style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
               <h3 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 1.1rem; font-weight: 600;">Exercise Needs</h3>
               <p style="color: var(--subtext-dark); line-height: 1.6; font-size: 14px;">${breedInfo.exercise}</p>
             </div>
             
-            <div style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
+            <div class="care-card" style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
               <h3 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 1.1rem; font-weight: 600;">Grooming</h3>
               <p style="color: var(--subtext-dark); line-height: 1.6; font-size: 14px;">${breedInfo.grooming}</p>
             </div>
             
-            <div style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
+            <div class="care-card" style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
               <h3 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 1.1rem; font-weight: 600;">Health</h3>
               <p style="color: var(--subtext-dark); line-height: 1.6; font-size: 14px;">${breedInfo.health}</p>
             </div>
             
-            <div style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
+            <div class="care-card" style="background: var(--background-dark); padding: 20px; border-radius: 8px;">
               <h3 style="color: var(--text-dark); margin: 0 0 12px 0; font-size: 1.1rem; font-weight: 600;">Training</h3>
               <p style="color: var(--subtext-dark); line-height: 1.6; font-size: 14px;">${breedInfo.training}</p>
             </div>
@@ -128,7 +128,7 @@ async function showDetails(breedId) {
           <h2 style="color: var(--text-dark); margin: 0 0 24px 0; font-size: 1.5rem; font-weight: 600;">${breed.name} Variants</h2>
           <p style="color: var(--subtext-dark); margin-bottom: 24px;">Explore the different variants of ${breed.name} breeds. Each variant has its own unique characteristics while sharing the core traits of the ${breed.name} family.</p>
           
-          <div id="subbreed-images" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+          <div id="subbreed-images" class="variants-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
             ${subBreeds.map(sub => `
               <div class="subbreed-item" style="text-align: center; cursor: pointer; background: var(--background-dark); padding: 16px; border-radius: 12px; transition: all 0.2s ease; border: 1px solid var(--border-dark);" onclick="showDetails('${sub.id}')" onmouseenter="prefetchBreedDetails('${sub.id}')" onmouseover="this.style.borderColor='var(--primary)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border-dark)'; this.style.transform='translateY(0)'">
                 <div class="subbreed-image" id="sub-img-${sub.id}" style="width: 100%; height: 160px; background: var(--border-dark); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 12px;">🐕</div>
@@ -143,7 +143,7 @@ async function showDetails(breedId) {
         <!-- Gallery Tab -->
         <div id="gallery-tab" class="tab-content" style="display: none;">
           <h2 style="color: var(--text-dark); margin: 0 0 24px 0; font-size: 1.5rem; font-weight: 600;">Gallery</h2>
-          <div id="breed-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+          <div id="breed-gallery" class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
             <!-- Gallery images will be loaded here -->
           </div>
         </div>
@@ -189,8 +189,8 @@ async function showDetails(breedId) {
 
 // Tab switching functionality
 function switchTab(tabName) {
-  // Hide all tab contents
-  const tabContents = document.querySelectorAll('.tab-content');
+  // Hide all tab contents (only the individual tab divs, not the container)
+  const tabContents = document.querySelectorAll('#about-tab, #care-tab, #variants-tab, #gallery-tab');
   tabContents.forEach(content => {
     content.style.display = 'none';
   });
@@ -258,16 +258,33 @@ function openImageModal(imageUrl, breedName) {
     justify-content: center;
     z-index: 2000;
     cursor: pointer;
+    padding: 20px;
+    box-sizing: border-box;
   `;
   
   modal.innerHTML = `
-    <div style="position: relative; max-width: 90%; max-height: 90%;">
-      <img src="${imageUrl}" alt="${breedName}" style="max-width: 100%; max-height: 100%; border-radius: 8px;">
-      <button style="position: absolute; top: -40px; right: 0; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✕</button>
+    <div style="position: relative; max-width: 100%; max-height: 100%; display: flex; align-items: center; justify-content: center;">
+      <img src="${imageUrl}" alt="${breedName}" style="max-width: 100%; max-height: 100%; border-radius: 8px; object-fit: contain;">
+      <button style="position: absolute; top: -50px; right: -10px; background: rgba(0, 0, 0, 0.7); border: none; color: white; font-size: 24px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">✕</button>
     </div>
   `;
   
-  modal.onclick = () => document.body.removeChild(modal);
+  modal.onclick = (e) => {
+    if (e.target === modal || e.target.tagName === 'BUTTON') {
+      document.body.removeChild(modal);
+    }
+  };
+  
+  // Prevent body scroll when modal is open
+  document.body.style.overflow = 'hidden';
+  
+  // Restore body scroll when modal is closed
+  const originalRemove = modal.remove;
+  modal.remove = function() {
+    document.body.style.overflow = '';
+    originalRemove.call(this);
+  };
+  
   document.body.appendChild(modal);
 }
 

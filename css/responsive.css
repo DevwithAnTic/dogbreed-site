@@ -26,4 +26,176 @@
   .sticky-search-icon {
     left: 14px;
   }
+
+  /* Main container mobile adjustments */
+  main.container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Breed Detail Page Mobile Styles */
+  .breed-detail-container {
+    margin: 0 -16px; /* Extend to screen edges */
+    border-radius: 0 !important;
+  }
+
+  .breed-detail-header {
+    padding: 16px !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .breed-detail-image {
+    width: 150px !important;
+    height: 150px !important;
+    align-self: center;
+  }
+
+  .breed-detail-info {
+    text-align: center;
+  }
+
+  .breed-detail-title {
+    font-size: 1.5rem !important;
+  }
+
+  .breed-detail-meta {
+    flex-direction: column !important;
+    gap: 4px !important;
+    text-align: center;
+  }
+
+  .breed-detail-meta span {
+    display: block;
+  }
+
+  .breed-detail-meta span:not(:last-child)::after {
+    content: none !important;
+  }
+
+  /* Tab Navigation Mobile */
+  .tab-navigation {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tab-navigation::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-button {
+    padding: 12px 16px !important;
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+
+  /* Tab Content Mobile */
+  .tab-content-container {
+    padding: 16px !important;
+  }
+
+  .care-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Override inline styles for mobile */
+  .care-grid[style] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .care-card {
+    padding: 16px !important;
+  }
+
+  /* Variants Grid Mobile */
+  .variants-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .subbreed-item {
+    padding: 12px !important;
+  }
+
+  .subbreed-image {
+    height: 120px !important;
+  }
+
+  /* Gallery Mobile */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  /* Override inline styles for mobile */
+  .gallery-grid[style] {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
+  }
+
+  /* Back Button Mobile */
+  .back-button {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .back-button span.material-icons {
+    font-size: 16px !important;
+  }
+
+  /* Breadcrumb Mobile */
+  .breadcrumb {
+    font-size: 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Trait Tags Mobile */
+  .trait-tags {
+    gap: 6px !important;
+  }
+
+  .trait-tag {
+    padding: 3px 8px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .breed-detail-container {
+    margin: 0 -12px;
+  }
+
+  .breed-detail-header {
+    padding: 12px !important;
+  }
+
+  .breed-detail-image {
+    width: 130px !important;
+    height: 130px !important;
+  }
+
+  .breed-detail-title {
+    font-size: 1.25rem !important;
+  }
+
+  .tab-button {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .variants-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+  }
 }
