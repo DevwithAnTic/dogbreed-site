@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Breed Search</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'><path d='M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9C22.1 9 23 9.9 23 11C23 12.1 22.1 13 21 13C19.9 13 19 12.1 19 11C19 9.9 19.9 9 21 9ZM3 9C4.1 9 5 9.9 5 11C5 12.1 4.1 13 3 13C1.9 13 1 12.1 1 11C1 9.9 1.9 9 3 9ZM19 20C19 18.9 18.1 18 17 18C15.9 18 15 18.9 15 20C15 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20ZM9 20C9 18.9 8.1 18 7 18C5.9 18 5 18.9 5 20C5 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20ZM15.5 13C17.43 13 19 14.57 19 16.5C19 18.43 17.43 20 15.5 20C13.57 20 12 18.43 12 16.5C12 14.57 13.57 13 15.5 13ZM8.5 13C10.43 13 12 14.57 12 16.5C12 18.43 10.43 20 8.5 20C6.57 20 5 18.43 5 16.5C5 14.57 6.57 13 8.5 13Z'/></svg>">
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'><path d='M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9C22.1 9 23 9.9 23 11C23 12.1 22.1 13 21 13C19.9 13 19 12.1 19 11C19 9.9 19.9 9 21 9ZM3 9C4.1 9 5 9.9 5 11C5 12.1 4.1 13 3 13C1.9 13 1 12.1 1 11C1 9.9 1.9 9 3 9ZM19 20C19 18.9 18.1 18 17 18C15.9 18 15 18.9 15 20C15 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20ZM9 20C9 18.9 8.1 18 7 18C5.9 18 5 18.9 5 20C5 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20ZM15.5 13C17.43 13 19 14.57 19 16.5C19 18.43 17.43 20 15.5 20C13.57 20 12 18.43 12 16.5C12 14.57 13.57 13 15.5 13ZM8.5 13C10.43 13 12 14.57 12 16.5C12 18.43 10.43 20 8.5 20C6.57 20 5 18.43 5 16.5C5 14.57 6.57 13 8.5 13Z'/></svg>">
+
+  <!-- Meta Tags for SEO and Social Sharing -->
+  <meta name="description"
+    content="Explore and learn about 190+ dog breeds with our modern, responsive search application. Features intelligent search, size filtering, and comprehensive breed information.">
+  <meta name="keywords" content="dog breeds, pet search, breed information, dog size, pet care, canine breeds">
+  <meta name="author" content="Dog Breed Search">
+  <meta name="theme-color" content="#10B981">
+
+  <!-- External Dependencies -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Modular CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sticky-search.css">
+  <link rel="stylesheet" href="css/accessibility.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body class="bg-[var(--background-dark)] font-sans text-[var(--text-dark)]">
+  <!-- Sticky Search Bar -->
+  <div id="stickySearchBar" class="sticky-search-bar">
+    <div class="sticky-search-container">
+      <span class="material-icons sticky-search-icon">search</span>
+      <input id="stickySearch" class="sticky-search-input" placeholder="Search breeds..." type="text">
+    </div>
+  </div>
+
+  <div class="min-h-screen">
+    <header class="bg-[var(--card-dark)] shadow-sm">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <span class="material-icons text-[var(--primary)] text-3xl mr-2">pets</span>
+            <h1 class="text-xl font-bold">Dog Breed Search</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+      <div class="mb-6">
+        <div class="relative">
+          <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-[var(--subtext-dark)]">search</span>
+          <input id="search"
+            class="w-full pl-10 pr-4 py-3 bg-[var(--card-dark)] border border-[var(--border-dark)] rounded-lg focus:ring-[var(--primary)] focus:border-[var(--primary)]"
+            placeholder="Search breeds..." type="text" />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-4">
+          <select id="sizeFilter"
+            class="bg-[var(--card-dark)] border border-[var(--border-dark)] rounded-lg focus:ring-[var(--primary)] focus:border-[var(--primary)]"
+            aria-label="Filter breeds by size category">
+            <option value="">All Sizes</option>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <select id="sortBy"
+            class="bg-[var(--card-dark)] border border-[var(--border-dark)] rounded-lg focus:ring-[var(--primary)] focus:border-[var(--primary)]"
+            aria-label="Sort breeds by name or random order">
+            <option value="name">Sort A-Z</option>
+            <option value="name-desc">Sort Z-A</option>
+            <option value="random">Random Order</option>
+          </select>
+          <button id="clearFilters"
+            class="bg-[var(--border-dark)] hover:bg-[var(--subtext-dark)] text-[var(--text-dark)] px-4 py-2 rounded-lg transition-colors duration-200 items-center gap-2 hidden"
+            aria-label="Clear all filters and show all breeds">
+            <span class="material-icons text-lg">clear_all</span>
+            <span class="hidden sm:inline">Show All</span>
+          </button>
+          <button id="randomBreed"
+            class="bg-[var(--primary)] hover:bg-[#059669] text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2"
+            aria-label="Show a random dog breed">
+            <span class="material-icons text-lg">shuffle</span>
+            <span class="hidden sm:inline">Surprise Me!</span>
+          </button>
+        </div>
+        <p id="breedCount" class="text-sm text-[var(--subtext-dark)]">Showing 0 of 0 dog breeds</p>
+      </div>
+
+      <!-- Accessibility help section -->
+      <div id="accessibilityHelp" class="sr-only" tabindex="-1">
+        <h2>Keyboard Navigation Help</h2>
+        <p>Use the following keyboard shortcuts to navigate the dog breed search:</p>
+        <ul>
+          <li>Tab: Navigate through interactive elements</li>
+          <li>Enter/Space: Activate buttons and select options</li>
+          <li>Arrow keys: Navigate within dropdown menus</li>
+          <li>Numbers 1-4 in size filter: Quick size selection (1=All, 2=Small, 3=Medium, 4=Large)</li>
+          <li>Escape in filters: Clear current filter</li>
+          <li>Alt+R: Show random breed</li>
+          <li>Alt+H: Show this help (press Alt+H to toggle)</li>
+        </ul>
+      </div>
+
+      <div id="results" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </main>
+  </div>
+
+  <!-- Modular JavaScript -->
+  <script src="js/config.js"></script>
+  <script src="js/breed-data.js"></script>
+  <script src="js/breed-classification.js"></script>
+  <script src="js/breed-information.js"></script>
+  <script src="js/ui-components.js"></script>
+  <script src="js/search-filters.js"></script>
+  <script src="js/sticky-search.js"></script>
+  <script src="js/breed-details.js"></script>
+  <script src="js/accessibility.js"></script>
+  <script src="js/mobile-gestures.js"></script>
+  <script src="js/breed-loader.js"></script>
+
+  <!-- Initialize Application -->
+  <script>
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', () => {
+      loadBreeds();
+    });
+  </script>
+</body>
+
+</html>

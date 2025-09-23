@@ -1,0 +1,137 @@
+/* Component Styles */
+
+/* Card Components */
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-image {
+  width: 100%;
+  height: 192px; /* h-48 equivalent */
+  background: var(--border-dark);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.hint {
+  color: var(--subtext-dark);
+  font-size: 0.875rem;
+}
+
+/* Confidence Indicators */
+.confidence-indicator {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: 4px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  cursor: help;
+  vertical-align: super;
+}
+
+.confidence-indicator.medium {
+  background: #ffa500;
+  color: #000;
+}
+
+.confidence-indicator.low {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+.confidence-indicator.pattern {
+  background: #4ecdc4;
+  color: #000;
+}
+
+.confidence-indicator.unknown {
+  background: #95a5a6;
+  color: #fff;
+}
+
+.confidence-indicator:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Size Text Styling */
+.size-text {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.size-text.small {
+  color: var(--primary);
+}
+
+.size-text.medium {
+  color: var(--primary);
+}
+
+.size-text.large {
+  color: var(--primary);
+}
+
+/* Loading Animation */
+.loading {
+  background: linear-gradient(90deg, var(--card-dark) 25%, var(--border-dark) 50%, var(--card-dark) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Sub-breed Hover Effects */
+.subbreed-item {
+  transition: all 0.2s ease;
+}
+
+.subbreed-item:hover .subbreed-image {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.subbreed-item:hover small {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Tab Button Hover Effects */
+.tab-button {
+  transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+  color: var(--text-dark) !important;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+/* Gallery Image Hover Effects */
+.gallery-image {
+  transition: transform 0.2s ease;
+}
+
+.gallery-image:hover {
+  transform: scale(1.02);
+}

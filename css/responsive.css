@@ -1,0 +1,29 @@
+/* Mobile and Responsive Styles */
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    padding: 8px;
+  }
+
+  .card-image {
+    height: 120px;
+  }
+
+  .sticky-search-bar {
+    padding: 8px 12px;
+  }
+
+  .sticky-search-input {
+    padding: 10px 14px 10px 42px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .sticky-search-icon {
+    left: 14px;
+  }
+}
