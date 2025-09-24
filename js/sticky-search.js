@@ -11,6 +11,8 @@ function setupStickySearchBar() {
     return;
   }
 
+  // Sticky search bar initialized successfully
+
   let lastScrollY = window.scrollY;
   let isScrollingUp = false;
   let scrollTimeout;
@@ -30,37 +32,74 @@ function setupStickySearchBar() {
     syncSearchInputs(stickySearchInput, mainSearchInput);
   });
 
+  // Check if we're on the details page
+  function isOnDetailsPage() {
+    const resultsContainer = document.getElementById('results');
+    if (!resultsContainer) return false;
+    
+    // Check if the results container has breed detail content
+    const hasBreedDetail = resultsContainer.querySelector('.breed-detail-container');
+    return hasBreedDetail !== null;
+  }
+
   // Scroll detection with debouncing
   function handleScroll() {
     const currentScrollY = window.scrollY;
     const scrollDifference = currentScrollY - lastScrollY;
 
-    // Determine scroll direction
-    if (scrollDifference < -10) { // Scrolling up with threshold
-      isScrollingUp = true;
-    } else if (scrollDifference > 10) { // Scrolling down with threshold
-      isScrollingUp = false;
+    // Don't show sticky search on details page
+    if (isOnDetailsPage()) {
+      hideSearchBar();
+      return;
     }
 
-    // Show/hide sticky search bar based on conditions
-    const shouldShowStickyBar = isScrollingUp && currentScrollY > 200; // Show after scrolling past 200px
+    // Determine scroll direction
+    if (Math.abs(scrollDifference) > 2) { // Only update direction for significant scrolls
+      if (scrollDifference < 0) {
+        isScrollingUp = true;
+      } else {
+        isScrollingUp = false;
+      }
+    }
+
+    // Show sticky search bar when scrolling up after passing threshold
+    const scrollThreshold = 80; // Show after scrolling past 80px
+    const shouldShowStickyBar = isScrollingUp && currentScrollY > scrollThreshold;
 
     if (shouldShowStickyBar) {
-      stickySearchBar.classList.add('visible');
-    } else {
-      stickySearchBar.classList.remove('visible');
+      showSearchBar();
+      // Clear any pending hide timeout when showing
+      clearTimeout(scrollTimeout);
+    } else if (!isScrollingUp && currentScrollY > scrollThreshold) {
+      // Hide when scrolling down (but only if we're past the threshold)
+      hideSearchBar();
+      clearTimeout(scrollTimeout);
+    } else if (currentScrollY <= scrollThreshold) {
+      // Always hide if we're at the top
+      hideSearchBar();
+      clearTimeout(scrollTimeout);
     }
 
     lastScrollY = currentScrollY;
 
-    // Clear timeout and set new one
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      // Hide sticky bar after user stops scrolling for 3 seconds
-      if (!isScrollingUp || currentScrollY <= 200) {
-        stickySearchBar.classList.remove('visible');
-      }
-    }, 3000);
+    // Auto-hide after 4 seconds of no scrolling (only if currently visible and scrolling up)
+    if (shouldShowStickyBar) {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        hideSearchBar();
+      }, 4000);
+    }
+  }
+
+  // Helper functions for showing/hiding the search bar
+  function showSearchBar() {
+    stickySearchBar.classList.remove('-translate-y-full');
+    stickySearchBar.classList.add('translate-y-0');
+  }
+
+  function hideSearchBar() {
+    stickySearchBar.classList.remove('translate-y-0');
+    stickySearchBar.classList.add('-translate-y-full');
   }
 
   // Throttled scroll event listener
@@ -78,6 +117,11 @@ function setupStickySearchBar() {
   // Add scroll event listener
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  // Initial check on page load
+  if (isOnDetailsPage()) {
+    hideSearchBar();
+  }
+
   // Hide sticky bar when clicking outside or pressing escape
   document.addEventListener('click', (e) => {
     if (!stickySearchBar.contains(e.target)) {
@@ -87,7 +131,7 @@ function setupStickySearchBar() {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      stickySearchBar.classList.remove('visible');
+      hideSearchBar();
       stickySearchInput.blur();
     }
   });
@@ -95,17 +139,50 @@ function setupStickySearchBar() {
   // Focus behavior
   stickySearchInput.addEventListener('focus', () => {
     clearTimeout(scrollTimeout); // Don't auto-hide while focused
+    // Update icon color on focus
+    const icon = stickySearchBar.querySelector('.material-icons');
+    if (icon) {
+      icon.classList.remove('text-[var(--subtext-dark)]');
+      icon.classList.add('text-[var(--primary)]');
+    }
   });
 
   stickySearchInput.addEventListener('blur', () => {
+    // Reset icon color on blur
+    const icon = stickySearchBar.querySelector('.material-icons');
+    if (icon) {
+      icon.classList.remove('text-[var(--primary)]');
+      icon.classList.add('text-[var(--subtext-dark)]');
+    }
     // Resume auto-hide behavior after blur
     scrollTimeout = setTimeout(() => {
-      if (!isScrollingUp || window.scrollY <= 200) {
-        stickySearchBar.classList.remove('visible');
+      if (!isScrollingUp || window.scrollY <= 100) {
+        hideSearchBar();
       }
     }, 1000);
   });
+
+  // Function to hide sticky search bar (called when navigating to details)
+  function hideStickySearchBar() {
+    hideSearchBar();
+  }
+
+  // Function to enable/disable sticky search bar
+  function setStickySearchBarEnabled(enabled) {
+    if (!enabled) {
+      hideSearchBar();
+    }
+    // The scroll handler will check isOnDetailsPage() automatically
+  }
+
+  // Export functions to the sticky search bar object
+  window.stickySearchBar = {
+    hide: hideStickySearchBar,
+    setEnabled: setStickySearchBarEnabled
+  };
 }
+
+
 
 // Export function for global access
 window.setupStickySearchBar = setupStickySearchBar;

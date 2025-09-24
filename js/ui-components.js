@@ -33,17 +33,44 @@ const imageObserver = new IntersectionObserver((entries) => {
 async function loadBreedImage(breed, imgElement) {
   try {
     imgElement.classList.add('loading');
-    const response = await fetch(`${window.AppConfig.API_BASE_URL}/breed/${breed.apiKey}/images/random`);
+    const apiUrl = `${window.AppConfig.API_BASE_URL}/breed/${breed.apiKey}/images/random`;
+    
+    // Debug logging for problematic breeds
+    if (breed.apiKey === 'african' || breed.apiKey === 'german') {
+      console.log(`🔍 Loading image for ${breed.name} (${breed.apiKey})`);
+      console.log(`🔗 API URL: ${apiUrl}`);
+    }
+    
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      },
+      cache: 'no-cache'
+    });
+    
     const data = await response.json();
+    
+    // Debug logging for problematic breeds
+    if (breed.apiKey === 'african' || breed.apiKey === 'german') {
+      console.log(`📊 API Response for ${breed.name}:`, data);
+    }
 
     if (data.status === 'success') {
       await preloadImage(data.message);
       imgElement.innerHTML = `<img src="${data.message}" alt="${breed.name}" class="w-full h-48 object-cover">`;
       imgElement.classList.remove('loading');
+      
+      if (breed.apiKey === 'african' || breed.apiKey === 'german') {
+        console.log(`✅ Successfully loaded image for ${breed.name}: ${data.message}`);
+      }
+    } else {
+      imgElement.classList.remove('loading');
+      console.warn(`❌ No image available for ${breed.name} (${breed.apiKey}):`, data);
     }
   } catch (error) {
     imgElement.classList.remove('loading');
-    console.log(`Failed to load image for ${breed.name}`);
+    console.error(`❌ Failed to load image for ${breed.name} (${breed.apiKey}):`, error);
   }
 }
 
@@ -69,6 +96,11 @@ function prefetchBreedDetails(breedId) {
 async function renderBreeds(breeds) {
   const results = document.getElementById('results');
   const breedCount = document.getElementById('breedCount');
+
+  // Re-enable sticky search bar when returning to breed list
+  if (window.stickySearchBar) {
+    window.stickySearchBar.setEnabled(true);
+  }
 
   // Update breed count
   breedCount.textContent = `Showing ${breeds.length} of ${window.AppConfig.allBreeds.filter(b => b.isMainBreed).length} dog breeds`;

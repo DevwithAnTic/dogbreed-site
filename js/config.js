@@ -15,12 +15,12 @@ let isLookupTablesInitialized = false;
 // Initialize breed classification logging for pattern matching analysis
 window.breedClassificationLogs = [];
 
-// API Configuration
-const API_BASE_URL = 'https://dog.ceo/api';
+// API Configuration - using local proxy to bypass CORS
+const API_BASE_URL = '/api';
 const BREEDS_ENDPOINT = `${API_BASE_URL}/breeds/list/all`;
 
-// Breeds known to have no images in Dog CEO API
-const BREEDS_WITHOUT_IMAGES = ['germanshepherd', 'african'];
+// Breeds known to have no images in Dog CEO API (currently none)
+const BREEDS_WITHOUT_IMAGES = [];
 
 // Export for use in other modules
 window.AppConfig = {

@@ -35,10 +35,13 @@
 
 <body class="bg-[var(--background-dark)] font-sans text-[var(--text-dark)]">
   <!-- Sticky Search Bar -->
-  <div id="stickySearchBar" class="sticky-search-bar">
-    <div class="sticky-search-container">
-      <span class="material-icons sticky-search-icon">search</span>
-      <input id="stickySearch" class="sticky-search-input" placeholder="Search breeds..." type="text">
+  <div id="stickySearchBar" class="fixed top-0 left-0 right-0 bg-[var(--card-dark)]/95 backdrop-blur-md border-b border-[var(--border-dark)] px-3 sm:px-4 py-2.5 sm:py-3 z-[9999] -translate-y-full transition-transform duration-300 ease-out shadow-lg">
+    <div class="max-w-2xl mx-auto relative">
+      <input id="stickySearch" 
+             class="w-full pl-11 sm:pl-12 pr-4 py-2.5 sm:py-3 bg-[var(--background-dark)] border border-[var(--border-dark)] rounded-full text-[var(--text-dark)] placeholder-[var(--subtext-dark)]/80 text-base outline-none transition-all duration-200 ease-out shadow-sm hover:border-[var(--subtext-dark)] focus:border-[var(--primary)] focus:bg-[var(--card-dark)] focus:shadow-md focus:ring-2 focus:ring-[var(--primary)]/20" 
+             placeholder="Search breeds..." 
+             type="text">
+      <span class="material-icons absolute left-3.5 sm:left-4 top-1/2 transform -translate-y-1/2 text-[var(--subtext-dark)] pointer-events-none transition-colors duration-200 text-lg sm:text-xl">search</span>
     </div>
   </div>
 
@@ -120,6 +123,7 @@
   <script src="js/config.js"></script>
   <script src="js/breed-data.js"></script>
   <script src="js/breed-classification.js"></script>
+  <script src="js/breed-information-extended.js"></script>
   <script src="js/breed-information.js"></script>
   <script src="js/ui-components.js"></script>
   <script src="js/search-filters.js"></script>

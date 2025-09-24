@@ -30,47 +30,11 @@ A modern, responsive web application for exploring and learning about dog breeds
 - **Size Classification**: Intelligent breed size detection with confidence indicators
 - **190+ Breeds**: Comprehensive database from The Dog CEO API
 
-### ⚡ **Performance Optimized**
-- **Modular Architecture**: 16 focused files instead of 1 monolithic file
-- **Advanced Caching**: 90% cache hit rate for returning users
-- **Image Optimization**: Lazy loading with intersection observer
-- **Service Worker**: Offline support and enhanced caching
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/dog-breed-search.git
-   cd dog-breed-search
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm start
-   ```
-
-4. **Open your browser**
-   ```
-   http://localhost:3000
-   ```
-
 ## 📁 Project Structure
 
 ```
 📁 dog-breed-search/
 ├── 📄 index.html                    # Main application entry point
-├── 📄 server.js                     # Express server
 ├── 📄 sw.js                        # Service worker for caching
 ├── 📁 css/                         # Modular stylesheets
 │   ├── variables.css               # CSS custom properties & theme
@@ -79,21 +43,17 @@ A modern, responsive web application for exploring and learning about dog breeds
 │   ├── accessibility.css           # Accessibility & focus styles
 │   └── responsive.css              # Mobile & responsive design
 ├── 📁 js/                          # Modular JavaScript
-│   ├── config.js                   # App configuration
-│   ├── breed-data.js               # Breed size database
-│   ├── breed-classification.js     # Size classification logic
-│   ├── breed-information.js        # Breed information database
-│   ├── ui-components.js            # Rendering & UI logic
-│   ├── search-filters.js           # Search & filtering
-│   ├── sticky-search.js            # Sticky search bar
-│   ├── breed-details.js            # Detailed view with tabs
-│   ├── breed-loader.js             # API integration
-│   ├── accessibility.js            # Accessibility features
-│   └── mobile-gestures.js          # Mobile touch support
-└── 📁 tests-and-docs/              # Tests & documentation
-    ├── performance-comparison.html  # Performance analysis
-    ├── index-monolithic.html       # Original version for comparison
-    └── [various test files]
+    ├── config.js                   # App configuration
+    ├── breed-data.js               # Breed size database
+    ├── breed-classification.js     # Size classification logic
+    ├── breed-information.js        # Breed information database
+    ├── ui-components.js            # Rendering & UI logic
+    ├── search-filters.js           # Search & filtering
+    ├── sticky-search.js            # Sticky search bar
+    ├── breed-details.js            # Detailed view with tabs
+    ├── breed-loader.js             # API integration
+    ├── accessibility.js            # Accessibility features
+    └── mobile-gestures.js          # Mobile touch support
 ```
 
 ## 🎯 Usage
@@ -121,20 +81,6 @@ A modern, responsive web application for exploring and learning about dog breeds
 
 ### Available Scripts
 
-```bash
-# Start development server
-npm start
-
-# Run tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# View test documentation
-open tests-and-docs/index.html
-```
-
 ### Architecture
 
 The application uses a **modular architecture** for better performance and maintainability:
@@ -147,20 +93,8 @@ The application uses a **modular architecture** for better performance and maint
 ### Performance Features
 
 - **Parallel Loading**: CSS and JS files load simultaneously
-- **Smart Caching**: Individual file caching (90% cache hit rate)
 - **Image Optimization**: Lazy loading with intersection observer
 - **Code Splitting**: Modular architecture prevents loading unused code
-
-## 🧪 Testing
-
-The project includes comprehensive testing utilities:
-
-- **Feature Tests**: Individual feature testing pages
-- **Performance Analysis**: Compare modular vs monolithic performance
-- **Accessibility Testing**: Keyboard navigation and screen reader support
-- **Mobile Testing**: Touch gestures and responsive design
-
-Access tests at: `http://localhost:3000/tests-and-docs/`
 
 ## 🎨 Customization
 
@@ -276,12 +210,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Tailwind CSS](https://tailwindcss.com/) for utility-first CSS framework
 - [Material Icons](https://fonts.google.com/icons) for beautiful icons
 - [Inter Font](https://rsms.me/inter/) for modern typography
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/dog-breed-search/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/dog-breed-search/discussions)
-- **Documentation**: [Project Wiki](https://github.com/yourusername/dog-breed-search/wiki)
 
 ---
 

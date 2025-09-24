@@ -4,17 +4,22 @@ async function showDetails(breedId) {
   const breed = window.AppConfig.allBreeds.find(b => b.id == breedId);
   if (!breed) return;
 
+  // Hide sticky search bar when showing details
+  if (window.stickySearchBar) {
+    window.stickySearchBar.hide();
+  }
+
   // Check if this is a main breed with sub-breeds
   let subBreeds = [];
-  
+
   if (breed.isMainBreed) {
     // If this is a main breed, find its sub-breeds
-    subBreeds = window.AppConfig.allBreeds.filter(b => 
+    subBreeds = window.AppConfig.allBreeds.filter(b =>
       !b.isMainBreed && b.parentBreed === breed.apiKey
     );
   } else {
     // If this is a sub-breed, find other sub-breeds of the same parent
-    subBreeds = window.AppConfig.allBreeds.filter(b => 
+    subBreeds = window.AppConfig.allBreeds.filter(b =>
       !b.isMainBreed && b.parentBreed === breed.parentBreed && b.id !== breed.id
     );
   }
@@ -261,30 +266,30 @@ function openImageModal(imageUrl, breedName) {
     padding: 20px;
     box-sizing: border-box;
   `;
-  
+
   modal.innerHTML = `
     <div style="position: relative; max-width: 100%; max-height: 100%; display: flex; align-items: center; justify-content: center;">
       <img src="${imageUrl}" alt="${breedName}" style="max-width: 100%; max-height: 100%; border-radius: 8px; object-fit: contain;">
       <button style="position: absolute; top: -50px; right: -10px; background: rgba(0, 0, 0, 0.7); border: none; color: white; font-size: 24px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">✕</button>
     </div>
   `;
-  
+
   modal.onclick = (e) => {
     if (e.target === modal || e.target.tagName === 'BUTTON') {
       document.body.removeChild(modal);
     }
   };
-  
+
   // Prevent body scroll when modal is open
   document.body.style.overflow = 'hidden';
-  
+
   // Restore body scroll when modal is closed
   const originalRemove = modal.remove;
-  modal.remove = function() {
+  modal.remove = function () {
     document.body.style.overflow = '';
     originalRemove.call(this);
   };
-  
+
   document.body.appendChild(modal);
 }
 
