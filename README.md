@@ -217,6 +217,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with ❤️ for dog lovers everywhere**
 
-[⭐ Star this repo](https://github.com/yourusername/dog-breed-search) • [🐛 Report Bug](https://github.com/yourusername/dog-breed-search/issues) • [💡 Request Feature](https://github.com/yourusername/dog-breed-search/issues)
+[⭐ Star this repo](https://github.com/DevwithAnTic/dogbreed-site) • [🐛 Report Bug](https://github.com/DevwithAnTic/dogbreed-site/issues) • [💡 Request Feature](https://github.com/DevwithAnTic/dogbreed-site/issues)
 
 </div>
